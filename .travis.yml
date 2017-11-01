@@ -11,7 +11,7 @@ cache:
 
 before_install:
   - curl -L https://goss.rocks/install | sudo sh
-  - sudo sed -i -e 's/"--color --format documentation"/"-r 300s -s 2s --color --format documentation"/g' $(which dgoss)
+  - sudo sed -i -e 's/"-r 30s -s 1s > /dev/null"/"-r 300s -s 2s --color --format documentation"/g' $(which dgoss)
   - cat $(which dgoss)
   - if [[ -e ~/docker/postgresql.tar ]]; then docker load -i ~/docker/postgresql.tar; fi
   - if [[ -e ~/docker/solr.tar ]]; then docker load -i ~/docker/solr.tar; fi
