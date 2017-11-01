@@ -5,9 +5,6 @@ language: python
 services:
   - docker
 
-env:
-  - GOSS_OPTS="--retry-timeout 300s --sleep 2s --color --format documentation"
-
 cache:
   directories:
      - ~/docker
@@ -36,5 +33,5 @@ install:
 
 script:
   - docker ps -a
-  - dgoss run -d --name ckan -p 5000:5000 --link db:db --link redis:redis --link solr:solr ckan
+  - sudo GOSS_OPTS="--retry-timeout 300s --sleep 2s --color --format documentation" dgoss run -d --name ckan -p 5000:5000 --link db:db --link redis:redis --link solr:solr ckan
 
