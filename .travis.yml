@@ -24,7 +24,7 @@ before_install:
   - mkdir -p ~/docker; docker save solr > ~/docker/solr.tar
   - mkdir -p ~/docker; docker save redis:latest > ~/docker/redis.tar
   - mkdir -p ~/docker; docker save ckan > ~/docker/ckan.tar
-  - curl -L https://goss.rocks/install | sudo sh
+  - curl -L https://goss.rocks/install | sh
 
 install:
   - docker run -d --name db postgresql
@@ -37,5 +37,5 @@ script:
   - echo "export GOSS_OPTS='-r 300s -s 2s --color --format documentation'" > set.sh
   - source set.sh
   - echo $GOSS_OPTS
-  - dgoss run --name ckan -p 5000:5000 --link db:db --link redis:redis --link solr:solr ckan
+  - . dgoss run --name ckan -p 5000:5000 --link db:db --link redis:redis --link solr:solr ckan
 
