@@ -33,5 +33,6 @@ install:
 
 script:
   - docker ps -a
-  - dgoss run -e GOSS_OPTS="--retry-timeout 300s --sleep 2s --color --format documentation" --name ckan -p 5000:5000 --link db:db --link redis:redis --link solr:solr ckan
+  - export GOSS_OPTS='-r 300s -s 2s --color --format documentation'
+  - dgoss run --name ckan -p 5000:5000 --link db:db --link redis:redis --link solr:solr ckan
 
