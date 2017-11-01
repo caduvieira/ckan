@@ -1,3 +1,8 @@
+file:
+  /goss/docker_output.log:
+    exists: true
+    contains:
+    - Starting server in PID 1.
 command:
   pip list | grep ckan:
     exit-status: 0
