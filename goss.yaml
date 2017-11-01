@@ -1,0 +1,23 @@
+file:
+  /goss/docker_output.log:
+    exists: true
+    contains:
+    - Starting server in PID 1.
+command:
+  pip list | grep ckan:
+    exit-status: 0
+    stdout:
+    - ckan (2.7.2, /src/ckan)
+    stderr:
+    - 'DEPRECATION: The default format will switch to columns in the future. You can
+      use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf
+      under the [list] section) to disable this warning.'
+    timeout: 10000
+http:
+  http://localhost:5000:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 100000
+    body:
+    - 'CKAN'
