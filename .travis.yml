@@ -33,6 +33,8 @@ install:
 
 script:
   - docker ps -a
-  - export GOSS_OPTS='-r 300s -s 2s --color --format documentation'
+  # see https://github.com/travis-ci/travis-ci/issues/7472
+  - echo "export GOSS_OPTS='-r 300s -s 2s --color --format documentation'" > set.sh
+  - source set.sh
   - dgoss run --name ckan -p 5000:5000 --link db:db --link redis:redis --link solr:solr ckan
 
