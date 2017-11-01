@@ -24,7 +24,7 @@ before_install:
   - mkdir -p ~/docker; docker save solr > ~/docker/solr.tar
   - mkdir -p ~/docker; docker save redis:latest > ~/docker/redis.tar
   - mkdir -p ~/docker; docker save ckan > ~/docker/ckan.tar
-  - curl -L https://goss.rocks/install | sh
+  - curl -L https://goss.rocks/install | sudo sh
 
 install:
   - docker run -d --name db postgresql
