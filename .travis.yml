@@ -10,6 +10,9 @@ cache:
      - ~/docker
 
 before_install:
+  - curl -L https://goss.rocks/install | sudo sh
+  - sudo sed -i -e 's/"--color --format documentation"/"-r 300s -s 2s --color --format documentation"/g' $(which dgoss)
+  - cat $(which dgoss)
   - if [[ -e ~/docker/postgresql.tar ]]; then docker load -i ~/docker/postgresql.tar; fi
   - if [[ -e ~/docker/solr.tar ]]; then docker load -i ~/docker/solr.tar; fi
   - if [[ -e ~/docker/redis.tar ]]; then docker load -i ~/docker/redis.tar; fi
@@ -24,8 +27,7 @@ before_install:
   - mkdir -p ~/docker; docker save solr > ~/docker/solr.tar
   - mkdir -p ~/docker; docker save redis:latest > ~/docker/redis.tar
   - mkdir -p ~/docker; docker save ckan > ~/docker/ckan.tar
-  - curl -L https://goss.rocks/install | sudo sh
-  - sudo sed -i -e 's/"--color --format documentation"/"-r 300s -s 2s --color --format documentation"/g' $(which dgoss)
+
 
 install:
   - docker run -d --name db postgresql
@@ -33,5 +35,6 @@ install:
   - docker run -d --name redis redis:latest
 
 script:
+
   - dgoss run --name ckan -p 5000:5000 --link db:db --link redis:redis --link solr:solr ckan
 
